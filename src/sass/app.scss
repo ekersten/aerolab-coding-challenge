@@ -7,10 +7,11 @@ body {
 
 header {
     .top-bar {
+        background: #fff;
         display: flex;
         align-content: center;
         justify-content: space-between;
-        padding: 20px;
+        padding: 28px 20px 20px;
 
         .logo {
             img {
@@ -51,28 +52,60 @@ header {
     }
 }
 
+.catalog-container {
+    background: #f9f9f9;
+}
+
 .catalog {
     max-width: 90%;
     margin: 0 auto;
 
+    .tools {
+        display: flex;
+        border-bottom: 1px solid #d9d9d9;
+        padding: 30px 0;
+        margin-bottom: 40px;
+        
+        .pager {
+            font-size: 24px;
+            color: #616161;
+            padding-right: 40px;
+            border-right: 1px solid #d9d9d9;
+        }
+        .filters {
+            padding-left: 40px;
+
+            .filter {
+                margin-right: 40px;
+                label {
+                    font-size: 24px;
+                    color: #a3a3a3;
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+
     .product-grid {
         display: flex;
-        align-items: flex-start;
+        align-items: space-between;
+        align-content: flex-start;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: flex-start;
         
         .product {
             padding: 12px;
             background: #fff;
-            max-width: 25%;
+            flex-basis: 22%;
             margin-bottom: 20px;
+            position: relative;
 
             .info {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                
+
                 .image {
                     img {
                         max-width: 100%;
@@ -92,6 +125,25 @@ header {
                         font-size: 18px;
                         color: #616161;
                     }
+                }
+            }
+
+            .redeem {
+                position: absolute;
+                right: 5%;
+                top: 5%;
+                width: 42px;
+                height: 42px;
+
+                &.missing {
+                    color: #fff;
+                    font-size: 14px;
+                    width: auto;
+                    height: auto;
+                    padding: 10px 40px 10px 15px;
+                    border-radius: 20px;
+                    background: rgba(0,0,0,0.3) url(./../assets/icons/coin.svg) no-repeat 95% 60%;
+                    background-size: 25px;
                 }
             }
         }

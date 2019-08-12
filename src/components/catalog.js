@@ -23,11 +23,8 @@ class Catalog extends Component {
     }
 
     sortByChange = (event) => {
-        this.setState({ sortBy: event.target.value });
-    }
-
-    sortDirChange = (event) => {
-        this.setState({ sortDir: event.target.value });
+        const [sortBy, sortDir] = event.target.value.split(' ');
+        this.setState({ sortBy, sortDir });
     }
 
     getFilteredProducts = (products) => {
@@ -53,6 +50,7 @@ class Catalog extends Component {
     getCatalog = () => {
         if(this.props.products.products) {
             return {
+                totalProducts: this.props.products.products.length,
                 products: this.getFilteredProducts(this.props.products.products),
                 categories: this.props.products.products.reduce((unique, item) => {
                     return unique.includes(item.category) ? unique : [...unique, item.category]
@@ -60,6 +58,7 @@ class Catalog extends Component {
             }
         } else {
             return {
+                totalProducts: 0,
                 products: [],
                 categories: []
             };
@@ -67,7 +66,7 @@ class Catalog extends Component {
     }
 
     render() {
-        const { products, categories } = this.getCatalog();
+        const { totalProducts, products, categories } = this.getCatalog();
         const categoryOptions = categories.map((item, i) => (
             <option value={item} key={i}>{item}</option>
         ))
@@ -75,30 +74,37 @@ class Catalog extends Component {
             <Product product={item} key={item._id}/>
         ))
         return (
-            <div className="catalog">
-                <div className="filters">
-                    Categoria: <select value={this.state.filterCategory} onChange={this.categoryChange}>
-                        <option value="">Todas</option>
-                        {categoryOptions}
-                    </select>
+            <div className="catalog-container">
+                <div className="catalog">
+                    <div className="tools">
+                        <div className="pager">{products.length} of {totalProducts} products</div>
+                        <div className="filters">
+                            <span className="filter">
+                                <label>Category:</label> <select value={this.state.filterCategory} onChange={this.categoryChange}>
+                                    <option value="">All</option>
+                                    {categoryOptions}
+                                </select>
+                            </span>
 
-                    Ordernar por: <select value={this.state.sortBy} onChange={this.sortByChange}>
-                        <option value="name">Nombre</option>
-                        <option value="category">Categoría</option>
-                        <option value="cost">Precio</option>
-                    </select>
-                    <select value={this.state.sortDir} onChange={this.sortDirChange}>
-                        <option value="asc">Menor a Mayor</option>
-                        <option value="desc">Mayor a Menor</option>
-                        
-                    </select>
-                </div>
+                            <span className="filter">
+                                <label>Sort By:</label> <select value={this.state.sortBy} onChange={this.sortByChange}>
+                                    <option value="name asc">Name Ascending</option>
+                                    <option value="name desc">Name Descending</option>
+                                    <option value="cost asc">Price Ascending</option>
+                                    <option value="cost desc">Price Descending</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
 
-                <div className="product-grid">
-                    {displayProducts}
+
+                    <div className="product-grid">
+                        {displayProducts}
+                    </div>
+
                 </div>
-                
             </div>
+            
         )
     }
 

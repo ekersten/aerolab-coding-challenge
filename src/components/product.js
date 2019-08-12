@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import redeemIcon from '../assets/icons/buy-blue.svg';
+
 class Product extends Component {
 
     render() {
@@ -9,6 +11,7 @@ class Product extends Component {
         if (this.props.user.user) {
             const { user } = this.props.user
             const { name, cost, category, img } = this.props.product;
+            const canRedeem = user.points >= cost;
             return (
                 <div className="product">
                     <div className="info">
@@ -19,6 +22,15 @@ class Product extends Component {
                             <div className="category">{category}</div>
                             <div className="name">{name}</div>
                         </div>
+                        {canRedeem ?
+                            <div className="redeem">
+                                <img src={redeemIcon} alt="redeem"/>
+                            </div>
+                        :
+                            <div className="redeem missing">
+                                You need {cost - user.points}
+                            </div>
+                        }
                     </div>
                     
                     {/* <h3>{name} {cost} points</h3>
