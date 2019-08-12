@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
+body {
+    background-color:#eceef3;
+    font-family: 'Open Sans', sans-serif;
+}
+
+header {
+    .top-bar {
+        display: flex;
+        align-content: center;
+        justify-content: space-between;
+        padding: 20px;
+
+        .logo {
+            img {
+                width: 38px;
+            }
+        }
+
+        .user-info {
+            font-size: 24px;
+            color: #616161;
+
+            .points {
+                background-color: #ededed;
+                background-image: url(./../assets/icons/coin.svg);
+                background-repeat: no-repeat;
+                background-position: 100% 60%;
+                padding: 10px 40px 10px 20px;
+                border-radius: 10px;
+
+            }
+        }
+    }    
+
+    .hero {
+        background: #fff url(./../assets/images/header-x1.png) no-repeat;
+        background-size: cover;
+        height: 412px;
+        position: relative;
+
+        .title {
+            position: absolute;
+            color: #fff;
+            left: 132px;
+            bottom: 48px;
+            font-size: 64px;
+            font-weight: bold;
+        }
+    }
+}
+
+.catalog {
+    max-width: 90%;
+    margin: 0 auto;
+
+    .product-grid {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        
+        .product {
+            padding: 12px;
+            background: #fff;
+            max-width: 25%;
+            margin-bottom: 20px;
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                
+                .image {
+                    img {
+                        max-width: 100%;
+                    }
+                }
+
+                .text {
+                    border-top: 1px solid #d9d9d9;
+                    width: 90%;
+                    padding: 10px 0;
+                    .category {
+                        font-size: 16px;
+                        color: #a3a3a3;
+                    }
+
+                    .name {
+                        font-size: 18px;
+                        color: #616161;
+                    }
+                }
+            }
+        }
+    }
+}
