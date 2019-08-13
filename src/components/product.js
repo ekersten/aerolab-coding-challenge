@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import numeral from 'numeral';
 
-import redeemIcon from '../assets/icons/buy-blue.svg';
+import coinIcon from '../assets/icons/coin.svg';
 
 class Product extends Component {
+
+    onRedeem = (id) => {
+        this.props.onRedeem(id);
+    }
 
     render() {
         
         
         if (this.props.user.user) {
             const { user } = this.props.user
-            const { name, cost, category, img } = this.props.product;
+            const { name, cost, category, img, _id } = this.props.product;
             const canRedeem = user.points >= cost;
             return (
                 <div className="product">
@@ -23,12 +28,16 @@ class Product extends Component {
                             <div className="name">{name}</div>
                         </div>
                         {canRedeem ?
-                            <div className="redeem">
-                                <img src={redeemIcon} alt="redeem"/>
-                            </div>
+                            <React.Fragment>
+                                <div className="redeem icon"></div>
+                                <div className="redeem action">
+                                    <div className="cost">{numeral(cost).format('0,0')} <img src={coinIcon} alt="coins"/></div>
+                                    <button onClick={() => this.onRedeem(_id)}>Redeem Now</button>
+                                </div>
+                            </React.Fragment>
                         :
                             <div className="redeem missing">
-                                You need {cost - user.points}
+                                You need {numeral(cost - user.points).format('0,0')}
                             </div>
                         }
                     </div>

@@ -1,4 +1,4 @@
-import { GET_USER } from '../types';
+import { GET_USER, ADD_POINTS } from '../types';
 
 export default function(state={}, action) {
 
@@ -7,6 +7,14 @@ export default function(state={}, action) {
             return {
                 ...state,
                 user: action.payload
+            }
+        case ADD_POINTS:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    points: action.payload['New Points']
+                }
             }
         default:
             return state

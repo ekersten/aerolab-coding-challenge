@@ -22,15 +22,107 @@ header {
         .user-info {
             font-size: 24px;
             color: #616161;
+            position: relative;
 
             .points {
                 background-color: #ededed;
                 background-image: url(./../assets/icons/coin.svg);
                 background-repeat: no-repeat;
-                background-position: 100% 60%;
-                padding: 10px 40px 10px 20px;
-                border-radius: 10px;
+                background-position: 95% 60%;
+                padding: 10px 45px 10px 20px;
+                border-radius: 40px;
+                min-width: 80px;
+                display: inline-block;
 
+            }
+
+            .options {
+                position: absolute;
+                top: 95%;
+                opacity: 0;
+                display: none;
+                z-index: 100;
+                padding: 20px;
+                background: #fff;
+                width: 85%;
+
+                transition: all 0.3s ease-in-out;
+
+                .option {
+                    margin-bottom: 20px;
+                    .title {
+                        font-size: 12px;
+                        color: #616161;
+                        padding: 10px 0;
+                        border-bottom: 1px solid #f2f2f2;
+                        margin-bottom: 10px;
+                    }
+
+                    .content {
+                        .add-points {
+                            font-size: 18px;
+                            color: #616161;
+                            background: #ededed url(./../assets/icons/coin.svg) no-repeat 95% 60%;
+                            border: none;
+                            display: block;
+                            cursor: pointer;
+                            margin: 10px auto;
+                            min-width: 40%;
+                            padding: 10px 40px 10px 20px;
+                            border-radius: 30px;
+
+                            &:hover {
+                                background-color: #d9d9d9;
+                            }
+                        }
+                    }
+                }
+
+                .history {
+                    .history-item {
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 10px;
+
+                        &:hover {
+                            background-color: #ededed;
+                        }
+
+                        .image {
+                            width: 40px;
+                            height: 40px;
+                            border: 1px solid #a3a3a3;
+                            background-color: #fff;
+                            background-size: contain;
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            margin-right: 10px;
+                        }
+
+                        .text {
+                            display: flex;
+                            flex-direction: column;
+
+                            .name {
+                                font-size: 12px;
+                                color: #616161
+                            }
+
+                            .date {
+                                font-size: 10px;
+                                color: #a3a3a3;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &:hover {
+                .options {
+                    display: block;
+                    top: 105%;
+                    opacity: 1;
+                }
             }
         }
     }    
@@ -54,6 +146,17 @@ header {
 
 .catalog-container {
     background: #f9f9f9;
+}
+
+.catalog-pager {
+    padding: 40px 0;
+    text-align: center;
+
+    button {
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
 }
 
 .catalog {
@@ -89,17 +192,31 @@ header {
     .product-grid {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
-        align-items: flex-start;
+        justify-content: flex-start;
+        margin-left: 2%;
         
         .product {
             padding: 55px 12px 12px;
             background: #fff;
-            margin-right: 20px;
-            margin-bottom: 20px;
-            width: 22%;
+            margin: 1%;
+            width: 23%;
             box-sizing: border-box;
             position: relative;
+            bottom: 0;
+
+            -webkit-box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.1);
+            -moz-box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.1);
+            box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.1);
+
+            transition: all 0.3s ease-in-out;
+
+            &:nth-child(4n+4) {
+                margin-right: 0;
+            }
+            
+            &:nth-child(4n+1) {
+                margin-left: 0;
+            }
 
             .info {
                 display: flex;
@@ -135,13 +252,67 @@ header {
             }
 
             .redeem {
-                position: absolute;
-                right: 5%;
-                top: 5%;
-                width: 42px;
-                height: 42px;
+
+                &.action {
+                    background: #09f;
+                    display: flex;
+                    opacity: 0;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 10;
+
+                    transition: all 0.3s ease-in-out;
+
+                    .cost {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 36px;
+                        color: #fff;
+                        margin-bottom: 10px;
+
+                        img {
+                            width: 35px;
+                            height: 35px;
+                            display: inline-block;
+                            margin-left: 10px;
+                            position: relative;
+                            top: 2px;
+                        }
+                    }
+
+                    button {
+                        border: none;
+                        background: #fff;
+                        font-size: 18px;
+                        color: #616161;
+                        border-radius: 25px;
+                        padding: 10px 60px;
+                        cursor: pointer;
+                    }
+                }
+
+                &.icon {
+                    position: absolute;
+                    background: url(./../assets/icons/buy-blue.svg) no-repeat;
+                    right: 5%;
+                    top: 5%;
+                    width: 42px;
+                    height: 42px;
+                    z-index: 20;
+                }
+                
 
                 &.missing {
+                    position: absolute;
+                    right: 5%;
+                    top: 5%;
                     color: #fff;
                     font-size: 14px;
                     width: auto;
@@ -150,6 +321,27 @@ header {
                     border-radius: 20px;
                     background: rgba(0,0,0,0.3) url(./../assets/icons/coin.svg) no-repeat 95% 60%;
                     background-size: 25px;
+                }
+            }
+
+            &:hover {
+                bottom: 4px;
+                -webkit-box-shadow: 8px 8px 8px 2px rgba(0,0,0,0.15);
+                -moz-box-shadow: 8px 8px 8px 2px rgba(0,0,0,0.15);
+                box-shadow: 8px 8px 8px 2px rgba(0,0,0,0.15);
+
+                .redeem {
+
+                    &.action {
+                        display: flex;
+                        opacity: 1;
+                    }
+
+                    &.icon {
+                        background: url(./../assets/icons/buy-white.svg) no-repeat;
+                        width: 45px;
+                        height: 45px;
+                    }
                 }
             }
         }
