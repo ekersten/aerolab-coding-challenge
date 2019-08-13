@@ -88,16 +88,17 @@ header {
 
     .product-grid {
         display: flex;
-        align-items: space-between;
-        align-content: flex-start;
         flex-wrap: wrap;
-        justify-content: flex-start;
+        justify-content: center;
+        align-items: flex-start;
         
         .product {
-            padding: 12px;
+            padding: 55px 12px 12px;
             background: #fff;
-            flex-basis: 22%;
+            margin-right: 20px;
             margin-bottom: 20px;
+            width: 22%;
+            box-sizing: border-box;
             position: relative;
 
             .info {
@@ -107,6 +108,11 @@ header {
                 align-items: center;
 
                 .image {
+                    background: #fff url(./../assets/images/loader.gif) no-repeat center center;
+                    width: 252px;
+                    height: 182px;
+                    margin-bottom: 45px;
+
                     img {
                         max-width: 100%;
                     }
